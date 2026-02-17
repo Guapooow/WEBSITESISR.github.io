@@ -2,84 +2,123 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <title>Vural Djyhan | Portfolio</title>
+    <title>Vural Djyhan | Portfolio BTS SIO SISR</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Portfolio de Ton Nom - Cybersécurité & Homelab">
+    <meta name="description" content="Portfolio de Vural Djyhan - BTS SIO SISR">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
 <header>
     <nav class="container">
-        <div class="logo">SISR</div>
+        <div class="logo">VD</div>
         <ul>
-            <li><a href="#about"></a></li>
+            <li><a href="#home">Accueil</a></li>
+            <li><a href="#about">À propos</a></li>
+            <li><a href="#skills">Compétences</a></li>
             <li><a href="#projects">Projets</a></li>
+            <li><a href="#veille">Veille</a></li>
             <li><a href="#contact">Contact</a></li>
         </ul>
     </nav>
 </header>
 
-<section class="hero">
+<!-- ================= ACCUEIL ================= -->
+<section id="home" class="hero">
     <div class="container">
         <h1>Vural Djyhan</h1>
-        <p>Actuellement étudiant au lycée Saint Paul BourdonBlanc en BTS SIO (Services informatiques aux organisations) en option SISR (Solutions d'Infrastructure, Systèmes et Réseaux) je me passione pour l'informatique
-        </p>
-        <a href="#projects" class="btn">Voir mes projets</a>
+        <p>Étudiant en BTS SIO option SISR (Solutions d'Infrastructure, Systèmes et Réseaux)</p>
+        <a href="#about" class="btn">Découvrir mon profil</a>
     </div>
 </section>
 
+<!-- ================= A PROPOS ================= -->
 <section id="about" class="section">
     <div class="container">
-        <h2>À propos</h2>
+        <h2>À propos de moi</h2>
         <p>
-            Passionné par la cybersécurité, les infrastructures et l’automatisation.
-            Je conçois et sécurise des environnements techniques robustes.
+            Actuellement étudiant en BTS SIO option SISR au lycée Saint Paul Bourdon Blanc,
+            je suis passionné par l'administration système, les réseaux et la cybersécurité.
+            Je développe mes compétences à travers des projets personnels et professionnels.
         </p>
+
+        <div class="grid-2">
+            <div>
+                <h3>🎓 Formation</h3>
+                <ul>
+                    <li>BTS SIO SISR – 2024-2026</li>
+                    <li>Baccalauréat Général</li>
+                </ul>
+            </div>
+
+            <div>
+                <h3>💼 Stage</h3>
+                <ul>
+                    <li>Stage technicien support informatique</li>
+                    <li>Maintenance réseau & assistance utilisateurs</li>
+                </ul>
+            </div>
+        </div>
     </div>
 </section>
 
-<section id="projects" class="section dark">
+<!-- ================= COMPETENCES ================= -->
+<section id="skills" class="section dark">
+    <div class="container">
+        <h2>Compétences</h2>
+
+        <div class="grid">
+            <div class="card">
+                <h3>Systèmes</h3>
+                <p>Windows Server, Linux, Active Directory</p>
+            </div>
+
+            <div class="card">
+                <h3>Réseaux</h3>
+                <p>VLAN, Routage, TCP/IP, Cisco</p>
+            </div>
+
+            <div class="card">
+                <h3>Cybersécurité</h3>
+                <p>Firewall, Analyse de vulnérabilités, Bonnes pratiques</p>
+            </div>
+
+            <div class="card">
+                <h3>Virtualisation</h3>
+                <p>VMware, VirtualBox, Hyper-V</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ================= PROJETS ================= -->
+<section id="projects" class="section">
     <div class="container">
         <h2>Projets</h2>
 
         <div class="grid">
             <div class="card">
-                <h3>Homelab Sécurisé</h3>
-                <p>Infrastructure virtualisée avec segmentation réseau et monitoring.</p>
+                <h3>Homelab Personnel</h3>
+                <p>Mise en place d'un environnement virtualisé avec segmentation réseau.</p>
             </div>
 
             <div class="card">
-                <h3>Audit Sécurité Web</h3>
-                <p>Analyse de vulnérabilités OWASP Top 10.</p>
+                <h3>Infrastructure Active Directory</h3>
+                <p>Déploiement d'un domaine Windows Server avec gestion des utilisateurs.</p>
             </div>
 
             <div class="card">
-                <h3>Automatisation DevSecOps</h3>
-                <p>CI/CD avec analyse statique et scan sécurité intégré.</p>
+                <h3>Supervision Réseau</h3>
+                <p>Installation et configuration d'un outil de monitoring.</p>
             </div>
         </div>
-
     </div>
 </section>
 
-<section id="contact" class="section">
+<!-- ================= VEILLE ================= -->
+<section id="veille" class="section dark">
     <div class="container">
-        <h2>Contact</h2>
-        <p>Email : contact@tondomaine.com</p>
-        <p>GitHub : github.com/tonprofil</p>
-    </div>
-</section>
-
-<footer>
-    <div class="container">
-        <p>© 2026 Ton Nom — Tous droits réservés</p>
-    </div>
-</footer>
-
-<script src="script.js"></script>
-</body>
-</html>
-
-
-
+        <h2>Veille Informatique</h2>
+        <p>
+            Ma veille technologique porte principalement sur la cybersécurité,
+            les nouvelles vulnérabilités et les évolutions des infrastructures rése
