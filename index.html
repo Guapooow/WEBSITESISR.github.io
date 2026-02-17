@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8" />
+<title>Ping Pong E-Sport Ultra+</title>
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+html,body{width:100%;height:100%;background:#0a0d14;font-family:Segoe UI,sans-serif;overflow:hidden;}
+
+#gameContainer{
+position:relative;width:100vw;height:100vh;
+display:flex;align-items:center;justify-content:center;
+background:radial-gradient(circle at 50% 20%,#0f1624 0%,#0a0d14 70%);
+}
+
+canvas{
+border-radius:22px;
+background:#0d111b;
+box-shadow:0 0 60px rgba(0,0,0,.9),0 0 140px rgba(0,150,255,.25);
+border:2px solid rgba(255,255,255,.08);
+z-index:1;
+}
+
+#scoreHUD{
+position:absolute;top:24px;left:50%;
+transform:translateX(-50%);
+display:flex;gap:40px;z-index:20;color:white;
+}
+
+.scoreBox{
+background:rgba(0,0,0,.6);
+padding:10px 22px;border-radius:999px;
+border:1px solid rgba(255,255,255,.2);
+text-align:center;min-width:120px;
+}
+
+.value{font-size:28px;font-weight:bold;}
+
+#startScreen{
+position:absolute;inset:0;
+background:rgba(0,0,0,.85);
+display:flex;align-items:center;justify-content:center;
+z-index:50;
+}
+
+#startPanel{
+width:420px;padding:30px;border-radius:20px;
+background:rgba(15,20,30,.95);
+text-align:center;color:white;
+}
+
+#startButton{
+margin-top:20px;width:100%;
+padding:14px;border-radius:999px;border:none;
+background:linear-gradient(90deg,#00c6ff,#0072ff);
+font-weight:bold;cursor:pointer;
+}
+</style>
+</head>
+
+<body>
+<div id="gameContainer">
+
+<canvas id="gameCanvas" width="1280" height="720"></canvas>
+
+<div id="scoreHUD">
+<div class="scoreBox"><div>Joueur</div><div class="value" id="playerScore">0</div></div>
+<div class="scoreBox"><div>IA</div><div class="value" id="aiScore">0</div></div>
+</div>
+
+<div id="startScreen">
+<div id="startPanel">
+<h1>PING PONG E-SPORT ULTRA+</h1>
+<button id="startButton">COMMENCER</button>
+</div>
+</div>
+
+</div>
+
+<script>
+const canvas=document.getElementById("gameCanvas");
+const ctx=canvas.getContext("2d");
+const WIDTH=canvas.width;
+const HEIGHT=canvas.height;
+
+const ballRadius=10;
+const paddleRadius=55;
+const paddleSpeed=500;
+
+let playerScore=0;
+let aiScore=0;
+
+class Paddle{
+constructor(x,isPlayer){
+this.x=x;
+this.y=HEIGHT/2;
+this.isPlayer=isPlayer;
+this.color=isPlayer?"#00c6ff":"#ff4d6d";
+}
+update(dt,input,ball){
+if(this.isPlayer){
+this.y+=input*paddleSpeed*dt;
+}else{
+if(ball.y>this.y) this.y+=paddleSpeed*.7*dt;
+if(ball.y<this.y) this.y-=paddleSpeed*.7*dt;
+}
+this.y=Math.max(paddleRadius+40,Math.min(HEIGHT-paddleRadius-40,this.y));
+}
+draw(){
+ctx.fillStyle=this.color;
+ctx.beginPath();
+ctx.arc(this.x,this.y,paddleRadius,0,Math.PI*2);
+ctx.fill();
+}
+}
+
+class Ball{
+constructor(){this.reset();}
+reset(dir=1){
+this.x=WIDTH/2;
+this.y=HEIGHT/2;
+this.speed=400;
+this.vx=this.speed*dir;
+this.vy=(Math.random()-.5)*300;
+}
+update(dt,p1,p2){
+this.x+=this.vx*dt;
+this.y+=this.vy*dt;
+
+if(this.y<40+ballRadius||this.y>HEIGHT-40-ballRadius){
+this.vy*=-1;
+}
+
+this.checkCollision(p1);
+this.checkCollision(p2);
+
+if(this.x<0){
+aiScore++;
+document.getElementById("aiScore").textContent=aiScore;
+this.reset(1);
+}
+if(this.x>WIDTH){
+playerScore++;
+document.getElementById("playerScore").textContent=playerScore;
+this.reset(-1);
+}
+}
+checkCollision(p){
+const dx=this.x-p.x;
+const dy=this.y-p.y;
+const dist=Math.sqrt(dx*dx+dy*dy);
+if(dist<paddleRadius+ballRadius){
+const angle=Math.atan2(dy,dx);
+this.vx=Math.cos(angle)*this.speed;
+this.vy=Math.sin(angle)*this.speed;
+this.x=p.x+Math.cos(angle)*(paddleRadius+ballRadius);
+this.y=p.y+Math.sin(angle)*(paddleRadius+ballRadius);
+}
+}
+draw(){
+ctx.fillStyle="#ffd700";
+ctx.beginPath();
+ctx.arc(this.x,this.y,ballRadius,0,Math.PI*2);
+ctx.fill();
+}
+}
+
+let player=new Paddle(120,true);
+let ai=new Paddle(WIDTH-120,false);
+let ball=new Ball();
+
+let input=0;
+let running=false;
+let lastTime=0;
+
+window.addEventListener("keydown",e=>{
+if(e.key==="ArrowUp") input=-1;
+if(e.key==="ArrowDown") input=1;
+});
+window.addEventListener("keyup",e=>{
+if(e.key==="ArrowUp"||e.key==="ArrowDown") input=0;
+});
+
+document.getElementById("startButton").addEventListener("click",()=>{
+document.getElementById("startScreen").style.display="none";
+running=true;
+lastTime=performance.now();
+requestAnimationFrame(loop);
+});
+
+function drawArena(){
+ctx.clearRect(0,0,WIDTH,HEIGHT);
+ctx.strokeStyle="rgba(255,255,255,.2)";
+ctx.setLineDash([20,20]);
+ctx.beginPath();
+ctx.moveTo(WIDTH/2,40);
+ctx.lineTo(WIDTH/2,HEIGHT-40);
+ctx.stroke();
+}
+
+function loop(timestamp){
+if(!running) return;
+const dt=(timestamp-lastTime)/1000;
+lastTime=timestamp;
+
+drawArena();
+player.update(dt,input,ball);
+ai.update(dt,input,ball);
+ball.update(dt,player,ai);
+
+player.draw();
+ai.draw();
+ball.draw();
+
+requestAnimationFrame(loop);
+}
+</script>
+
+</body>
+</html>
