@@ -175,3 +175,8 @@ nav a:hover::after {
     opacity: 1;
     transform: translateY(0);
 }
+
+.virtualbox {
+    width : 100 px;
+
+}
