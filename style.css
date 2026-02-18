@@ -6,12 +6,20 @@
 }
 
 body {
-    font-family: Arial, sans-serif;
-    background: #0f172a;
-    color: #f1f5f9;
+    font-family: 'Segoe UI', sans-serif;
+    background: #0a0a0a;
+    color: #f5f5f5;
     line-height: 1.6;
 }
 
+/* ===== COULEURS ===== */
+:root {
+    --yellow: #ffd60a;
+    --dark: #0a0a0a;
+    --card: #111111;
+}
+
+/* ===== CONTAINER ===== */
 .container {
     width: 90%;
     max-width: 1100px;
@@ -20,10 +28,24 @@ body {
 
 /* ===== NAVIGATION ===== */
 header {
-    background: #0f172a;
+    background: #000;
     padding: 20px 0;
     position: sticky;
     top: 0;
+    z-index: 1000;
+    border-bottom: 2px solid var(--yellow);
+}
+
+.logo {
+    font-weight: bold;
+    font-size: 1.5rem;
+    color: var(--yellow);
+    letter-spacing: 2px;
+    transition: 0.3s;
+}
+
+.logo:hover {
+    text-shadow: 0 0 15px var(--yellow);
 }
 
 nav {
@@ -35,17 +57,29 @@ nav {
 nav ul {
     list-style: none;
     display: flex;
-    gap: 20px;
+    gap: 25px;
 }
 
 nav a {
     text-decoration: none;
-    color: #f1f5f9;
+    color: white;
+    position: relative;
     transition: 0.3s;
 }
 
-nav a:hover {
-    color: #38bdf8;
+nav a::after {
+    content: "";
+    position: absolute;
+    width: 0%;
+    height: 2px;
+    bottom: -5px;
+    left: 0;
+    background: var(--yellow);
+    transition: 0.3s;
+}
+
+nav a:hover::after {
+    width: 100%;
 }
 
 /* ===== HERO ===== */
@@ -54,53 +88,90 @@ nav a:hover {
     display: flex;
     align-items: center;
     text-align: center;
+    justify-content: center;
 }
 
 .hero h1 {
     font-size: 3rem;
+    color: var(--yellow);
 }
 
 .btn {
     display: inline-block;
-    margin-top: 20px;
-    padding: 10px 20px;
-    background: #38bdf8;
-    color: #0f172a;
+    margin-top: 25px;
+    padding: 12px 25px;
+    background: var(--yellow);
+    color: black;
     text-decoration: none;
+    font-weight: bold;
     border-radius: 5px;
+    transition: 0.3s;
+}
+
+.btn:hover {
+    background: white;
 }
 
 /* ===== SECTIONS ===== */
 .section {
-    padding: 80px 0;
+    padding: 100px 0;
 }
 
-.section.dark {
-    background: #1e293b;
-}
-
-/* ===== PROJECT GRID ===== */
+/* ===== GRID ===== */
 .grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 20px;
+    gap: 30px;
 }
 
+/* ===== CARDS ===== */
 .card {
-    background: #0f172a;
-    padding: 20px;
-    border-radius: 8px;
-    transition: 0.3s;
+    background: var(--card);
+    padding: 30px;
+    border-radius: 10px;
+    border: 1px solid #222;
+    transition: 0.4s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.card::before {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 3px;
+    top: 0;
+    left: 0;
+    background: var(--yellow);
 }
 
 .card:hover {
-    transform: translateY(-5px);
-    background: #334155;
+    transform: translateY(-10px);
+    box-shadow: 0 0 25px rgba(255, 214, 10, 0.4);
 }
 
-/* ===== FOOTER ===== */
-footer {
-    text-align: center;
-    padding: 20px 0;
-    background: #0f172a;
+/* ===== COMPETENCE BOX STYLE ===== */
+.card h3 {
+    color: var(--yellow);
+    margin-bottom: 10px;
+}
+
+/* ===== GRID 2 ===== */
+.grid-2 {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 40px;
+    margin-top: 40px;
+}
+
+/* ===== ANIMATION ===== */
+.hidden {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: all 0.8s ease;
+}
+
+.show {
+    opacity: 1;
+    transform: translateY(0);
 }
