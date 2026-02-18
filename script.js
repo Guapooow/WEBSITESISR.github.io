@@ -1,27 +1,24 @@
-// Smooth scroll
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function(e) {
-        e.preventDefault();
-        document.querySelector(this.getAttribute('href'))
-            .scrollIntoView({ behavior: 'smooth' });
+// Animation apparition au scroll
+const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.classList.add("show");
+        }
     });
 });
-/* GRID 2 colonnes (formation / stage) */
-.grid-2 {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 40px;
-    margin-top: 40px;
-}
 
-h3 {
-    margin-bottom: 10px;
-}
+document.querySelectorAll(".card, .section h2, .section p").forEach(el => {
+    el.classList.add("hidden");
+    observer.observe(el);
+});
 
-ul {
-    list-style: none;
-}
+// Effet dynamique logo
+const logo = document.querySelector(".logo");
 
-ul li {
-    margin-bottom: 10px;
-}
+logo.addEventListener("mousemove", () => {
+    logo.style.transform = "scale(1.2)";
+});
+
+logo.addEventListener("mouseleave", () => {
+    logo.style.transform = "scale(1)";
+});
