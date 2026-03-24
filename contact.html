@@ -2,16 +2,18 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <title>Contact - Vural Djyhan</title>
+    <title>Contact — Vural Djyhan</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
 
 <header>
     <nav class="container">
         <div class="logo">VD</div>
+        <button class="menu-toggle" aria-label="Menu">
+            <span></span><span></span><span></span>
+        </button>
         <ul>
             <li><a href="index.html">Accueil</a></li>
             <li><a href="a_propos.html">À propos</a></li>
@@ -25,11 +27,59 @@
 
 <section class="section">
     <div class="container">
-        <h2>Contact</h2>
-        <p>Email : tonemail@email.com</p>
-        <p>LinkedIn : ton lien LinkedIn</p>
+
+        <div class="section-header">
+            <span class="section-tag">05 / Contact</span>
+            <h2>Me contacter<span class="dot">.</span></h2>
+            <div class="divider"></div>
+        </div>
+
+        <div class="contact-grid">
+
+            <div class="contact-aside">
+                <p>Disponible pour des opportunités de stage, d'alternance ou tout simplement pour échanger sur un projet technique. N'hésitez pas à me contacter.</p>
+                <p style="color: var(--text-muted); font-size: 0.85rem; font-family: var(--font-mono);">// Réponse sous 48h</p>
+            </div>
+
+            <div class="contact-info">
+                <a href="mailto:tonemail@email.com" class="contact-link">
+                    <div class="contact-link-icon">✉️</div>
+                    <div class="contact-link-body">
+                        <div class="link-label">Email</div>
+                        <div class="link-value">tonemail@email.com</div>
+                    </div>
+                </a>
+
+                <a href="https://linkedin.com" target="_blank" rel="noopener" class="contact-link">
+                    <div class="contact-link-icon">💼</div>
+                    <div class="contact-link-body">
+                        <div class="link-label">LinkedIn</div>
+                        <div class="link-value">Vural Djyhan</div>
+                    </div>
+                </a>
+
+                <a href="https://github.com" target="_blank" rel="noopener" class="contact-link">
+                    <div class="contact-link-icon">🐙</div>
+                    <div class="contact-link-body">
+                        <div class="link-label">GitHub</div>
+                        <div class="link-value">github.com/ton-profil</div>
+                    </div>
+                </a>
+            </div>
+
+        </div>
+
     </div>
 </section>
+
+<footer>
+    <div class="container">
+        <div class="footer-inner">
+            <span class="footer-logo">VD</span>
+            <span class="footer-copy">© 2025 Vural Djyhan — Portfolio BTS SIO SISR</span>
+        </div>
+    </div>
+</footer>
 
 <script src="script.js"></script>
 </body>

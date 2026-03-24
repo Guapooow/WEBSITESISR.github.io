@@ -2,16 +2,18 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <title>Veille - Vural Djyhan</title>
+    <title>Veille — Vural Djyhan</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
 
 <header>
     <nav class="container">
         <div class="logo">VD</div>
+        <button class="menu-toggle" aria-label="Menu">
+            <span></span><span></span><span></span>
+        </button>
         <ul>
             <li><a href="index.html">Accueil</a></li>
             <li><a href="a_propos.html">À propos</a></li>
@@ -25,13 +27,61 @@
 
 <section class="section">
     <div class="container">
-        <h2>Veille Informatique</h2>
-        <p>
-            Ma veille technologique porte sur la cybersécurité,
-            les nouvelles vulnérabilités et les évolutions des infrastructures réseau.
-        </p>
+
+        <div class="section-header">
+            <span class="section-tag">04 / Veille</span>
+            <h2>Veille informatique<span class="dot">.</span></h2>
+            <p class="section-desc">Suivi régulier de l'actualité cybersécurité, des nouvelles vulnérabilités et des évolutions des infrastructures réseau.</p>
+            <div class="divider"></div>
+        </div>
+
+        <div class="veille-list">
+
+            <div class="veille-card">
+                <div class="veille-date">Fév 2025</div>
+                <div class="veille-content">
+                    <h3>Vulnérabilités critiques dans les routeurs SOHO</h3>
+                    <p>Analyse des failles de sécurité récemment découvertes sur des routeurs grand public et professionnels d'entrée de gamme, impact sur les PME et contre-mesures recommandées.</p>
+                </div>
+            </div>
+
+            <div class="veille-card">
+                <div class="veille-date">Jan 2025</div>
+                <div class="veille-content">
+                    <h3>Évolution des attaques par ransomware</h3>
+                    <p>Étude des nouvelles techniques utilisées par les groupes de ransomware : double extorsion, ciblage des sauvegardes et contournement des EDR. Stratégies de défense adaptées.</p>
+                </div>
+            </div>
+
+            <div class="veille-card">
+                <div class="veille-date">Déc 2024</div>
+                <div class="veille-content">
+                    <h3>Active Directory : vecteurs d'attaque courants</h3>
+                    <p>Revue des techniques d'élévation de privilèges sur environnements Active Directory : Pass-the-Hash, Kerberoasting, DCSync. Focus sur la détection et le durcissement.</p>
+                </div>
+            </div>
+
+            <div class="veille-card">
+                <div class="veille-date">Nov 2024</div>
+                <div class="veille-content">
+                    <h3>Proxmox VE vs XCP-NG : comparatif hyperviseurs</h3>
+                    <p>Comparaison des deux principales solutions open-source d'hyperviseur de type 1, performances, gestion du stockage, haute disponibilité et cas d'usage en entreprise.</p>
+                </div>
+            </div>
+
+        </div>
+
     </div>
 </section>
+
+<footer>
+    <div class="container">
+        <div class="footer-inner">
+            <span class="footer-logo">VD</span>
+            <span class="footer-copy">© 2025 Vural Djyhan — Portfolio BTS SIO SISR</span>
+        </div>
+    </div>
+</footer>
 
 <script src="script.js"></script>
 </body>
