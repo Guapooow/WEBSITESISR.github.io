@@ -5,6 +5,47 @@
     <title>Compétences — Vural Djyhan</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
+    <style>
+        .tabs {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 40px;
+        }
+        .tab {
+            padding: 8px 18px;
+            border-radius: 100px;
+            border: 1px solid var(--border);
+            background: transparent;
+            color: var(--text-muted);
+            font-family: var(--font-mono);
+            font-size: 0.72rem;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        .tab:hover {
+            border-color: rgba(232, 192, 0, 0.35);
+            color: var(--yellow);
+        }
+        .tab.active {
+            background: var(--yellow);
+            border-color: var(--yellow);
+            color: #000;
+            font-weight: 700;
+        }
+        .card.filtered-out {
+            display: none;
+        }
+        @keyframes fadeCard {
+            from { opacity: 0; transform: translateY(12px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+        .card.fade-in {
+            animation: fadeCard 0.25s ease forwards;
+        }
+    </style>
 </head>
 <body>
 
@@ -35,12 +76,21 @@
             <div class="divider"></div>
         </div>
 
-        <div class="grid">
+        <div class="tabs">
+            <button class="tab active" data-filter="all">Tout</button>
+            <button class="tab" data-filter="systemes">Systèmes</button>
+            <button class="tab" data-filter="reseaux">Réseaux</button>
+            <button class="tab" data-filter="securite">Sécurité</button>
+            <button class="tab" data-filter="virtualisation">Virtualisation</button>
+            <button class="tab" data-filter="outils">Outils</button>
+        </div>
 
-            <div class="card">
+        <div class="grid" id="skills-grid">
+
+            <div class="card" data-category="systemes">
                 <div class="card-icon">🖥️</div>
-                <h3>Systèmes/Administration système </h3>
-                <p>Installation, configuration et gestion de systèmes d’exploitation (Windows/Linux), gestion des utilisateurs, des droits et maintenance des serveurs.</p>
+                <h3>Systèmes & Administration</h3>
+                <p>Installation, configuration et gestion de systèmes d'exploitation Windows/Linux, gestion des utilisateurs, des droits et maintenance des serveurs.</p>
                 <ul>
                     <li>Windows Server</li>
                     <li>Linux</li>
@@ -49,10 +99,10 @@
                 </ul>
             </div>
 
-            <div class="card">
+            <div class="card" data-category="reseaux">
                 <div class="card-icon">🌐</div>
                 <h3>Réseaux</h3>
-                <p>Mise en place et configuration de réseaux informatiques (adressage IP, routage, VLAN), compréhension des protocoles et résolution de problèmes réseau..</p>
+                <p>Mise en place et configuration de réseaux informatiques, compréhension des protocoles et résolution de problèmes réseau.</p>
                 <ul>
                     <li>VLAN</li>
                     <li>TCP/IP</li>
@@ -63,10 +113,10 @@
                 </ul>
             </div>
 
-            <div class="card">
+            <div class="card" data-category="securite">
                 <div class="card-icon">🔒</div>
                 <h3>Cybersécurité</h3>
-                <p>Analyse et renforcement de la sécurité des infrastructures.</p>
+                <p>Analyse et renforcement de la sécurité des infrastructures, conformité et gestion des risques.</p>
                 <ul>
                     <li>Firewall</li>
                     <li>Vulnérabilités</li>
@@ -75,10 +125,10 @@
                 </ul>
             </div>
 
-            <div class="card">
+            <div class="card" data-category="virtualisation">
                 <img class="skill-img" src="virtualbox.png" alt="VirtualBox logo">
                 <h3>Virtualisation</h3>
-                <p>Création et gestion de machines virtuelles pour simuler des environnements, optimiser les ressources et faciliter les tests et déploiements. Hyperviseur de type 1 et type 2</p>
+                <p>Création et gestion de machines virtuelles. Hyperviseur de type 1 (XCP-NG, Proxmox) et type 2 (VirtualBox).</p>
                 <ul>
                     <li>XCP-NG</li>
                     <li>Proxmox</li>
@@ -86,26 +136,37 @@
                 </ul>
             </div>
 
-            <div class="card">
-                <div class="card-icon">📡</div>
+            <div class="card" data-category="outils">
+                <div class="card-icon">💾</div>
                 <h3>Sauvegarde</h3>
-                <p>Mise en place de solutions de sauvegarde pour assurer la protection et la restauration des données en cas de perte ou incident.</p>
+                <p>Mise en place de solutions de sauvegarde pour assurer la protection et la restauration des données.</p>
                 <ul>
-                    <li>SNMP</li>
-                    <li>Zabbix</li>
-                    <li>Nagios</li>
+                    <li>Veeam</li>
+                    <li>Rsync</li>
+                    <li>Backup Exec</li>
                 </ul>
             </div>
 
-            <div class="card">
-                <div class="card-icon">🛠️</div>
+            <div class="card" data-category="outils">
+                <div class="card-icon">📡</div>
                 <h3>Supervision / Monitoring</h3>
-                <p>Outils du quotidien d'un technicien systèmes et réseaux.</p>
+                <p>Surveillance en temps réel des équipements et services pour détecter les anomalies et assurer la disponibilité.</p>
                 <ul>
-                    <li>Git</li>
+                    <li>Zabbix</li>
+                    <li>Nagios</li>
+                    <li>SNMP</li>
+                </ul>
+            </div>
+
+            <div class="card" data-category="outils">
+                <div class="card-icon">🛠️</div>
+                <h3>Outils & Méthodes</h3>
+                <p>Outils du quotidien d'un technicien pour diagnostiquer, documenter et collaborer efficacement.</p>
+                <ul>
                     <li>Wireshark</li>
-                    <li>Markdown</li>
+                    <li>Git</li>
                     <li>Ticketing</li>
+                    <li>Markdown</li>
                 </ul>
             </div>
 
@@ -124,5 +185,29 @@
 </footer>
 
 <script src="script.js"></script>
+<script>
+    const tabs = document.querySelectorAll('.tab');
+    const cards = document.querySelectorAll('#skills-grid .card');
+
+    tabs.forEach(tab => {
+        tab.addEventListener('click', () => {
+            tabs.forEach(t => t.classList.remove('active'));
+            tab.classList.add('active');
+
+            const filter = tab.dataset.filter;
+
+            cards.forEach(card => {
+                const match = filter === 'all' || card.dataset.category === filter;
+                if (match) {
+                    card.classList.remove('filtered-out', 'fade-in');
+                    void card.offsetWidth;
+                    card.classList.add('fade-in');
+                } else {
+                    card.classList.add('filtered-out');
+                }
+            });
+        });
+    });
+</script>
 </body>
 </html>
