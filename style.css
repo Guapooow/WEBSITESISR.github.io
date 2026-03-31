@@ -477,6 +477,13 @@ nav ul li a.active {
     transition: var(--transition);
 }
 
+.project-card img {
+    display: block;
+    margin: 0 auto;
+    max-width: 100%;
+    height: auto;
+}
+
 .project-card:hover {
     border-color: #282828;
     transform: translateY(-4px);
