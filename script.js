@@ -48,7 +48,14 @@ fetch("https://api.rss2json.com/v1/api.json?rss_url=https://www.tomshardware.com
   .then(data => {
     const container = document.getElementById("rss-feed");
 
-    data.items.slice(0, 5).forEach(item => {
+    const filtered = data.items.filter(item =>
+      item.title.toLowerCase().includes("ram") ||
+      item.title.toLowerCase().includes("ddr") ||
+      item.title.toLowerCase().includes("memory") ||
+      item.description.toLowerCase().includes("ram")
+    );
+
+    filtered.slice(0, 5).forEach(item => {
       const article = document.createElement("div");
       article.className = "veille-card";
 
