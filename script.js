@@ -42,3 +42,23 @@ if (logo) {
         logo.style.letterSpacing = '4px';
     });
 }
+
+fetch("https://api.rss2json.com/v1/api.json?rss_url=https://www.tomshardware.com/feeds/all")
+  .then(response => response.json())
+  .then(data => {
+    const container = document.getElementById("rss-feed");
+
+    data.items.slice(0, 5).forEach(item => {
+      const article = document.createElement("div");
+      article.className = "veille-card";
+
+      article.innerHTML = `
+        <h3>${item.title}</h3>
+        <img src="${item.thumbnail}" style="max-width:100%">
+        <p>${item.description.substring(0, 150)}...</p>
+        <a href="${item.link}" target="_blank">Lire l'article</a>
+      `;
+
+      container.appendChild(article);
+    });
+  });
