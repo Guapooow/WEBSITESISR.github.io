@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<rss version="2.0">
+  <channel>
+    <title>Veille informatique - WEBSTESISR</title>
+    <link>https://guapooow.github.io/WEBSITESISR/</link>
+    <description>Actualité cybersécurité et infrastructure</description>
+
+    <item>
+      <title>Vulnérabilités critiques dans les routeurs SOHO</title>
+      <link>https://guapooow.github.io/WEBSITESISR/veille.html#fev2025</link>
+      <pubDate>Sat, 01 Feb 2025 00:00:00 GMT</pubDate>
+      <description>Analyse des failles de sécurité sur les routeurs grand public.</description>
+    </item>
+
+    <item>
+      <title>Évolution des attaques par ransomware</title>
+      <link>https://guapooow.github.io/WEBSITESISR/veille.html#jan2025</link>
+      <pubDate>Wed, 01 Jan 2025 00:00:00 GMT</pubDate>
+      <description>Nouvelles techniques des groupes de ransomware.</description>
+    </item>
+
+    <item>
+      <title>Active Directory : vecteurs d'attaque courants</title>
+      <link>https://guapooow.github.io/WEBSITESISR/veille.html#dec2024</link>
+      <pubDate>Sun, 01 Dec 2024 00:00:00 GMT</pubDate>
+      <description>Pass-the-Hash, Kerberoasting, DCSync.</description>
+    </item>
+
+    <item>
+      <title>Proxmox VE vs XCP-ng</title>
+      <link>https://guapooow.github.io/WEBSITESISR/veille.html#nov2024</link>
+      <pubDate>Fri, 01 Nov 2024 00:00:00 GMT</pubDate>
+      <description>Comparatif des hyperviseurs open-source.</description>
+    </item>
+
+  </channel>
+</rss>
