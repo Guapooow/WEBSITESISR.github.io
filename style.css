@@ -635,6 +635,12 @@ nav ul li a.active {
   margin: 10px 0;
 }
 
+.veille-card img {
+  width: 100% !important;
+  max-height: 180px !important;
+  object-fit: cover !important;
+}
+
 .contact-link {
     display: flex;
     align-items: center;
