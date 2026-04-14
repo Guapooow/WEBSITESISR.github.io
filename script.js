@@ -69,8 +69,22 @@ fetch("https://api.rss2json.com/v1/api.json?rss_url=https://www.tomshardware.com
       container.appendChild(article);
     });
   });
-
-const keywords = ["ram", "ddr", "memory", "dram", "hbm"];
+const keywords = [
+  "ram",
+  "memory",
+  "dram",
+  "ddr",
+  "ddr4",
+  "ddr5",
+  "hbm",
+  "lpddr",
+  "semiconductor",
+  "micron",
+  "hynix",
+  "samsung",
+  "memory pricing",
+  "memory market"
+];
 
 const filtered = data.items.filter(item =>
   keywords.some(keyword =>
