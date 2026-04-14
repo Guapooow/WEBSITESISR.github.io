@@ -48,47 +48,44 @@ fetch("https://api.rss2json.com/v1/api.json?rss_url=https://www.tomshardware.com
   .then(data => {
     const container = document.getElementById("rss-feed");
 
-    const filtered = data.items.filter(item =>
-      item.title.toLowerCase().includes("ram") ||
-      item.title.toLowerCase().includes("ddr") ||
-      item.title.toLowerCase().includes("memory") ||
-      item.description.toLowerCase().includes("ram")
-    );
+    const keywords = [
+      "ram",
+      "memory",
+      "dram",
+      "ddr",
+      "ddr4",
+      "ddr5",
+      "hbm",
+      "lpddr",
+      "semiconductor",
+      "micron",
+      "hynix",
+      "samsung",
+      "memory pricing",
+      "memory market"
+    ];
 
-    filtered.slice(0, 5).forEach(item => {
+    const filtered = data.items.filter(item => {
+      const text = (item.title + " " + item.description).toLowerCase();
+      return keywords.some(keyword => text.includes(keyword));
+    });
+
+    filtered.slice(0, 8).forEach(item => {
       const article = document.createElement("div");
       article.className = "veille-card";
 
       article.innerHTML = `
         <h3>${item.title}</h3>
-        <img src="${item.thumbnail}" style="max-width:100%">
-        <p>${item.description.substring(0, 150)}...</p>
+        <img src="${item.thumbnail || ''}" class="rss-img">
+        <p>${item.description?.substring(0, 150) || ""}...</p>
         <a href="${item.link}" target="_blank">Lire l'article</a>
       `;
 
       container.appendChild(article);
     });
+  })
+  .catch(err => {
+    console.error(err);
+    document.getElementById("rss-feed").innerHTML =
+      "Erreur de chargement du flux RSS";
   });
-const keywords = [
-  "ram",
-  "memory",
-  "dram",
-  "ddr",
-  "ddr4",
-  "ddr5",
-  "hbm",
-  "lpddr",
-  "semiconductor",
-  "micron",
-  "hynix",
-  "samsung",
-  "memory pricing",
-  "memory market"
-];
-
-const filtered = data.items.filter(item =>
-  keywords.some(keyword =>
-    item.title.toLowerCase().includes(keyword) ||
-    item.description.toLowerCase().includes(keyword)
-  )
-);
