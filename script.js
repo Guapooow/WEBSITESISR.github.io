@@ -69,3 +69,12 @@ fetch("https://api.rss2json.com/v1/api.json?rss_url=https://www.tomshardware.com
       container.appendChild(article);
     });
   });
+
+const keywords = ["ram", "ddr", "memory", "dram", "hbm"];
+
+const filtered = data.items.filter(item =>
+  keywords.some(keyword =>
+    item.title.toLowerCase().includes(keyword) ||
+    item.description.toLowerCase().includes(keyword)
+  )
+);
