@@ -18,7 +18,10 @@
     --card-hover: #1a1a1a;
     --border: #252525;
     --text: #e8e8e8;
-    --text-muted: #6a6a6a;
+    
+    /* 🔴 MODIFICATION ICI : Un gris plus clair et légèrement bleuté pour la lisibilité */
+    --text-muted: #a1a1aa; 
+    
     --font-display: 'Syne', sans-serif;
     --font-mono: 'Space Mono', monospace;
     --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
@@ -543,65 +546,96 @@ nav ul li a.active {
 }
 
 /* ===== VEILLE ===== */
-.veille-list {
-    display: flex;
-    flex-direction: column;
-    gap: 14px;
+
+/* 1. Création d'une grille pour le conteneur injecté par le JS */
+#rss-feed {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 24px;
+    margin-top: 40px;
 }
 
+/* 2. Refonte de la carte en mode "colonne" */
 .veille-card {
     display: flex;
-    gap: 24px;
+    flex-direction: column; /* Le texte passe sous l'image */
     background: var(--card);
     border: 1px solid var(--border);
     border-radius: 12px;
-    padding: 26px 28px;
+    padding: 24px;
     transition: var(--transition);
     position: relative;
     overflow: hidden;
 }
 
+/* Animation de la bordure jaune (passée en haut pour plus d'élégance) */
 .veille-card::before {
     content: '';
     position: absolute;
     left: 0;
     top: 0;
-    bottom: 0;
-    width: 2px;
+    right: 0;
+    height: 2px;
     background: var(--yellow);
-    transform: scaleY(0);
-    transform-origin: top;
+    transform: scaleX(0);
+    transform-origin: left;
     transition: var(--transition);
 }
 
-.veille-card:hover::before { transform: scaleY(1); }
+/* Effet de survol harmonisé avec tes projets */
+.veille-card:hover::before { transform: scaleX(1); }
 .veille-card:hover {
     background: var(--card-hover);
-    border-color: #242424;
+    border-color: #333;
+    transform: translateY(-4px); 
+    box-shadow: 0 10px 24px rgba(0,0,0,0.3);
 }
 
-.veille-date {
-    font-family: var(--font-mono);
-    font-size: 0.68rem;
-    color: var(--yellow);
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    white-space: nowrap;
-    padding-top: 3px;
-    min-width: 76px;
-}
-
-.veille-content h3 {
-    font-size: 0.95rem;
+/* 3. Typographie de la carte */
+.veille-card h3 {
+    font-size: 1.05rem;
     font-weight: 700;
     color: var(--text);
-    margin-bottom: 8px;
+    margin-bottom: 12px;
+    line-height: 1.4;
 }
 
-.veille-content p {
-    font-size: 0.85rem;
+.veille-card p {
+    font-size: 0.9rem;
     color: var(--text-muted);
-    line-height: 1.7;
+    line-height: 1.6;
+    margin-bottom: 20px;
+    flex-grow: 1; /* Permet de pousser le bouton d'action vers le bas */
+}
+
+/* 4. Harmonisation des images (pour éviter qu'elles ne déforment la carte) */
+.rss-img {
+    width: 100%;
+    height: 160px;
+    object-fit: cover; /* Recadre l'image proprement sans l'écraser */
+    border-radius: 8px;
+    display: block;
+    margin-bottom: 16px;
+    background: var(--dark-2); /* Fond de secours si l'image charge lentement */
+}
+
+/* 5. Transformation du lien brut en bouton discret */
+.veille-card a {
+    display: inline-block;
+    color: var(--yellow);
+    text-decoration: none;
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    margin-top: auto;
+    padding-top: 16px;
+    border-top: 1px solid var(--border);
+    transition: var(--transition);
+}
+
+.veille-card a:hover {
+    color: #fff;
 }
 
 /* ===== CONTACT ===== */
