@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Stages — Vural Djyhan</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .stage-block { margin-bottom: 80px; }
+        .stage-block:last-child { margin-bottom: 0; }
+
+        .stage-header {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            gap: 24px;
+            padding-bottom: 28px;
+            border-bottom: 1px solid var(--border);
+            margin-bottom: 36px;
+            flex-wrap: wrap;
+        }
+
+        .stage-year-badge {
+            display: inline-block;
+            font-family: var(--font-mono);
+            font-size: 0.68rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            padding: 5px 14px;
+            border-radius: 100px;
+            background: var(--yellow);
+            color: #000;
+            font-weight: 700;
+            margin-bottom: 12px;
+        }
+
+        .stage-title {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--text);
+            margin-bottom: 10px;
+        }
+
+        .stage-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 16px;
+        }
+
+        .stage-meta-item {
+            display: flex;
+            align-items: center;
+            gap: 7px;
+            font-family: var(--font-mono);
+            font-size: 0.72rem;
+            color: var(--text-muted);
+        }
+
+        .stage-duration {
+            font-family: var(--font-mono);
+            font-size: 0.72rem;
+            color: var(--text-muted);
+            background: var(--card);
+            border: 1px solid var(--border);
+            padding: 8px 16px;
+            border-radius: var(--radius);
+            white-space: nowrap;
+            align-self: flex-start;
+        }
+
+        .stage-intro {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 26px 30px;
+            margin-bottom: 36px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stage-intro::before {
+            content: '';
+            position: absolute;
+            left: 0; top: 0; bottom: 0;
+            width: 3px;
+            background: var(--yellow);
+        }
+
+        .stage-intro h3 {
+            font-family: var(--font-mono);
+            font-size: 0.7rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--yellow);
+            margin-bottom: 12px;
+        }
+
+        .stage-intro p {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            line-height: 1.8;
+        }
+
+        .missions-title {
+            font-family: var(--font-mono);
+            font-size: 0.68rem;
+            letter-spacing: 2.5px;
+            text-transform: uppercase;
+            color: var(--yellow);
+            margin-bottom: 20px;
+        }
+
+        .missions-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+            gap: 16px;
+        }
+
+        .mission-card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            overflow: hidden;
+            transition: var(--transition);
+        }
+
+        .mission-card:hover {
+            border-color: #2e2e2e;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 28px rgba(0,0,0,0.3);
+        }
+
+        .mission-img {
+            width: 100%;
+            aspect-ratio: 16/9;
+            background: var(--dark-2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-bottom: 1px solid var(--border);
+            position: relative;
+            font-size: 2rem;
+            overflow: hidden;
+        }
+
+        .mission-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .mission-img .ph {
+            position: absolute;
+            bottom: 8px;
+            right: 10px;
+            font-family: var(--font-mono);
+            font-size: 0.58rem;
+            color: var(--text-muted);
+            letter-spacing: 1px;
+            opacity: 0.45;
+        }
+
+        .mission-body { padding: 22px 24px; }
+
+        .mission-badge {
+            display: inline-block;
+            font-family: var(--font-mono);
+            font-size: 0.63rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            color: var(--yellow);
+            background: var(--yellow-dim);
+            padding: 3px 10px;
+            border-radius: 100px;
+            margin-bottom: 10px;
+        }
+
+        .mission-badge.highlight {
+            background: var(--yellow);
+            color: #000;
+            font-weight: 700;
+        }
+
+        .mission-body h4 {
+            font-size: 0.93rem;
+            font-weight: 700;
+            color: var(--text);
+            margin-bottom: 8px;
+        }
+
+        .mission-body p {
+            font-size: 0.83rem;
+            color: var(--text-muted);
+            line-height: 1.75;
+        }
+
+        .mission-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            margin-top: 14px;
+        }
+
+        .mission-tags span {
+            background: var(--dark-2);
+            border: 1px solid var(--border);
+            padding: 3px 9px;
+            border-radius: 100px;
+            font-size: 0.7rem;
+            color: var(--text-muted);
+            font-family: var(--font-mono);
+        }
+
+        .stage-separator {
+            border: none;
+            border-top: 1px dashed var(--border);
+            margin: 72px 0;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <nav class="container">
+        <div class="logo">VD</div>
+        <button class="menu-toggle" aria-label="Menu">
+            <span></span><span></span><span></span>
+        </button>
+        <ul>
+            <li><a href="index.html">Accueil</a></li>
+            <li><a href="a_propos.html">À propos</a></li>
+            <li><a href="competence.html">Compétences</a></li>
+            <li><a href="projet.html">Projets</a></li>
+            <li><a href="veille.html">Veille</a></li>
+            <li><a href="stage.html">Stages</a></li>
+            <li><a href="contact.html">Contact</a></li>
+        </ul>
+    </nav>
+</header>
+
+<section class="section">
+    <div class="container">
+
+        <div class="section-header">
+            <span class="section-tag">05 / Stages</span>
+            <h2>Expériences en entreprise<span class="dot">.</span></h2>
+            <p class="section-desc">Deux stages effectués dans le cadre du BTS SIO SISR, avec des missions concrètes en environnement professionnel.</p>
+            <div class="divider"></div>
+        </div>
+
+        <!-- ===== 1ère ANNÉE ===== -->
+        <div class="stage-block">
+
+            <div class="stage-header">
+                <div>
+                    <span class="stage-year-badge">1ère année</span>
+                    <div class="stage-title">Phileas Techno</div>
+                    <div class="stage-meta">
+                        <div class="stage-meta-item">📍 Saint-Jean-de-Braye (45)</div>
+                        <div class="stage-meta-item">📅 19 mai — 20 juin 2025</div>
+                        <div class="stage-meta-item">⏱ 5 semaines</div>
+                    </div>
+                </div>
+                <div class="stage-duration">Mai → Juin 2025</div>
+            </div>
+
+            <div class="stage-intro">
+                <h3>Présentation de l'entreprise</h3>
+                <p>
+                    Phileas Techno est une entreprise spécialisée dans les solutions audiovisuelles et techniques, implantée à Saint-Jean-de-Braye. Elle intervient sur des projets d'installation et de déploiement de systèmes sonores, vidéo et de sécurité pour des clients variés — collectivités, lieux de culte, structures événementielles. J'y ai intégré l'équipe technique en tant que stagiaire technicien, intervenant directement sur le terrain.
+                </p>
+            </div>
+
+            <p class="missions-title">// Missions réalisées</p>
+
+            <div class="missions-grid">
+
+                <div class="mission-card">
+                    <div class="mission-img">
+                        🔊
+                        <span class="ph">[ ajouter une photo ]</span>
+                    </div>
+                    <div class="mission-body">
+                        <span class="mission-badge">Déploiement</span>
+                        <h4>Installation sono — Église de Cheverny</h4>
+                        <p>Déploiement et mise en service d'un système de sonorisation dans l'église de Cheverny : câblage, placement des enceintes, réglage et tests de la chaîne audio complète.</p>
+                        <div class="mission-tags">
+                            <span>Audio</span>
+                            <span>Câblage</span>
+                            <span>Mise en service</span>
+                            <span>Terrain</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mission-card">
+                    <div class="mission-img">
+                        📷
+                        <span class="ph">[ ajouter une photo ]</span>
+                    </div>
+                    <div class="mission-body">
+                        <span class="mission-badge">Réparation & déploiement</span>
+                        <h4>Système de vidéosurveillance</h4>
+                        <p>Diagnostic et réparation de caméras défaillantes, puis déploiement de nouvelles unités : pose, raccordement réseau, alimentation et vérification du flux vidéo.</p>
+                        <div class="mission-tags">
+                            <span>Caméras IP</span>
+                            <span>Réseau</span>
+                            <span>Diagnostic</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mission-card">
+                    <div class="mission-img">
+                        🛠️
+                        <span class="ph">[ ajouter une photo ]</span>
+                    </div>
+                    <div class="mission-body">
+                        <span class="mission-badge">Installation</span>
+                        <h4>Mise en place d'équipements</h4>
+                        <p>Participation à diverses installations techniques chez des clients : montage, raccordement et configuration d'équipements audiovisuels et de sécurité sur site.</p>
+                        <div class="mission-tags">
+                            <span>AV</span>
+                            <span>Sécurité</span>
+                            <span>Terrain</span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <hr class="stage-separator">
+
+        <!-- ===== 2ème ANNÉE ===== -->
+        <div class="stage-block">
+
+            <div class="stage-header">
+                <div>
+                    <span class="stage-year-badge">2ème année</span>
+                    <div class="stage-title">Antartic</div>
+                    <div class="stage-meta">
+                        <div class="stage-meta-item">📍 Saint-Martin-d'Abbat (45)</div>
+                        <div class="stage-meta-item">📅 9 février — 27 mars 2026</div>
+                        <div class="stage-meta-item">⏱ 7 semaines</div>
+                    </div>
+                </div>
+                <div class="stage-duration">Fév → Mars 2026</div>
+            </div>
+
+            <div class="stage-intro">
+                <h3>Présentation de l'entreprise</h3>
+                <p>
+                    Antartic est une entreprise industrielle de taille significative spécialisée dans la production agroalimentaire (siroperie). Malgré un parc informatique étendu sur l'ensemble du site de production, l'équipe IT interne reste de petite taille, ce qui implique une grande polyvalence. J'y ai effectué mon stage de 2ème année en tant que technicien systèmes et réseaux, avec des missions à forte valeur ajoutée pour l'équipe.
+                </p>
+            </div>
+
+            <p class="missions-title">// Missions réalisées</p>
+
+            <div class="missions-grid">
+
+                <div class="mission-card">
+                    <div class="mission-img">
+                        📄
+                        <span class="ph">[ ajouter une photo ]</span>
+                    </div>
+                    <div class="mission-body">
+                        <span class="mission-badge">Documentation</span>
+                        <h4>Documentation utilisateur</h4>
+                        <p>Rédaction de guides et procédures à destination des utilisateurs finaux pour faciliter l'utilisation des outils internes et réduire les sollicitations au support technique.</p>
+                        <div class="mission-tags">
+                            <span>Rédaction</span>
+                            <span>Support</span>
+                            <span>Utilisateurs</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mission-card">
+                    <div class="mission-img">
+                        💾
+                        <span class="ph">[ ajouter une photo ]</span>
+                    </div>
+                    <div class="mission-body">
+                        <span class="mission-badge">Sauvegarde</span>
+                        <h4>Sauvegarde des postes de production</h4>
+                        <p>Mise en place d'une solution de sauvegarde des disques durs sur les postes des lignes de siroperie : configuration, vérification des restaurations et documentation du processus.</p>
+                        <div class="mission-tags">
+                            <span>Backup</span>
+                            <span>Postes clients</span>
+                            <span>Lignes de prod</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mission-card">
+                    <div class="mission-img">
+                        ⚙️
+                        <span class="ph">[ ajouter une photo ]</span>
+                    </div>
+                    <div class="mission-body">
+                        <span class="mission-badge highlight">Mission principale</span>
+                        <h4>Automatisation des drivers HP & Dell</h4>
+                        <p>Développement d'un script PowerShell d'automatisation du déploiement des drivers HP et Dell. Le script détecte le modèle de la machine et installe les drivers correspondants automatiquement, éliminant une tâche manuelle chronophage pour l'équipe IT.</p>
+                        <div class="mission-tags">
+                            <span>PowerShell</span>
+                            <span>HP</span>
+                            <span>Dell</span>
+                            <span>Automatisation</span>
+                            <span>Déploiement</span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<footer>
+    <div class="container">
+        <div class="footer-inner">
+            <span class="footer-logo">VD</span>
+            <span class="footer-copy">© 2025 Vural Djyhan — Portfolio BTS SIO SISR</span>
+        </div>
+    </div>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
