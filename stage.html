@@ -150,6 +150,13 @@
             display: block;
         }
 
+        /* Image avec fond blanc (logos, screenshots) */
+        .mission-img img.img-contain {
+            object-fit: contain;
+            padding: 20px;
+            background: #0e0e0e;
+        }
+
         .mission-body { padding: 22px 24px; }
 
         .mission-badge {
@@ -377,7 +384,7 @@
 
                 <div class="mission-card">
                     <div class="mission-img">
-                        <img src="image/bash.png" alt="Script PowerShell">
+                        <img src="image/bash.png" alt="Script PowerShell" class="img-contain">
                     </div>
                     <div class="mission-body">
                         <span class="mission-badge highlight">Mission principale</span>
