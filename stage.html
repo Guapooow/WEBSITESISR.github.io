@@ -132,33 +132,22 @@
 
         .mission-img {
             width: 100%;
-            aspect-ratio: 16/9;
+            height: 200px;
             background: var(--dark-2);
+            border-bottom: 1px solid var(--border);
+            overflow: hidden;
             display: flex;
             align-items: center;
             justify-content: center;
-            border-bottom: 1px solid var(--border);
-            position: relative;
             font-size: 2rem;
-            overflow: hidden;
         }
 
         .mission-img img {
             width: 100%;
             height: 100%;
             object-fit: cover;
+            object-position: center;
             display: block;
-        }
-
-        .mission-img .ph {
-            position: absolute;
-            bottom: 8px;
-            right: 10px;
-            font-family: var(--font-mono);
-            font-size: 0.58rem;
-            color: var(--text-muted);
-            letter-spacing: 1px;
-            opacity: 0.45;
         }
 
         .mission-body { padding: 22px 24px; }
@@ -255,7 +244,7 @@
             <div class="stage-header">
                 <div>
                     <span class="stage-year-badge">1ère année</span>
-                    <div class="stage-title">Phileas Techno</div>
+                    <div class="stage-title">Phileas Technologie</div>
                     <div class="stage-meta">
                         <div class="stage-meta-item">📍 Saint-Jean-de-Braye (45)</div>
                         <div class="stage-meta-item">📅 19 mai — 20 juin 2025</div>
@@ -267,9 +256,7 @@
 
             <div class="stage-intro">
                 <h3>Présentation de l'entreprise</h3>
-                <p>
-                   Phileas Technologie est une entreprise spécialisée dans la sécurité résidentielle et les infrastructures réseau
-                </p>
+                <p>Phileas Technologie est une entreprise spécialisée dans la sécurité résidentielle et les infrastructures réseau, implantée à Saint-Jean-de-Braye. Elle accompagne les particuliers dans la protection de leur domicile à travers des solutions d'alarme et de vidéosurveillance sur mesure, ainsi que dans le déploiement de réseaux fibre.</p>
             </div>
 
             <p class="missions-title">// Missions réalisées</p>
@@ -277,7 +264,8 @@
             <div class="missions-grid">
 
                 <div class="mission-card">
-                    <img src="image/eglise-de-saint-etienne.jpg" />
+                    <div class="mission-img">
+                        <img src="image/eglise-de-saint-etienne.jpg" alt="Église de Cheverny">
                     </div>
                     <div class="mission-body">
                         <span class="mission-badge">Déploiement</span>
@@ -293,7 +281,8 @@
                 </div>
 
                 <div class="mission-card">
-                    <img src="image/camera.jpg" />
+                    <div class="mission-img">
+                        <img src="image/camera.jpg" alt="Caméra de surveillance">
                     </div>
                     <div class="mission-body">
                         <span class="mission-badge">Réparation & déploiement</span>
@@ -308,15 +297,16 @@
                 </div>
 
                 <div class="mission-card">
-                    <img src="image/fibre.jpg" />
+                    <div class="mission-img">
+                        <img src="image/fibre.jpg" alt="Déploiement fibre">
                     </div>
                     <div class="mission-body">
                         <span class="mission-badge">Installation</span>
-                        <h4>Mise en place d'équipements</h4>
-                        <p>Participation à diverses installations techniques chez des clients : montage, raccordement et configuration d'équipements audiovisuels et de sécurité sur site.</p>
+                        <h4>Déploiement fibre optique</h4>
+                        <p>Participation à des chantiers de déploiement fibre chez des clients particuliers : tirage de câble, raccordement et tests de continuité.</p>
                         <div class="mission-tags">
-                            <span>AV</span>
-                            <span>Sécurité</span>
+                            <span>Fibre</span>
+                            <span>Câblage</span>
                             <span>Terrain</span>
                         </div>
                     </div>
@@ -345,9 +335,7 @@
 
             <div class="stage-intro">
                 <h3>Présentation de l'entreprise</h3>
-                <p>
-                    Antartic est une une entreprise industrielle spécialisée dans la production de boissons non alcoolisées
-                </p>
+                <p>Antartic est une entreprise industrielle spécialisée dans la production de boissons non alcoolisées, disposant d'un parc informatique étendu sur l'ensemble du site de production. Malgré un parc conséquent, l'équipe IT interne reste de petite taille, ce qui implique une grande polyvalence.</p>
             </div>
 
             <p class="missions-title">// Missions réalisées</p>
@@ -355,12 +343,13 @@
             <div class="missions-grid">
 
                 <div class="mission-card">
-                    <img src="image/documentation.png" />
+                    <div class="mission-img">
+                        <img src="image/documentation.png" alt="Documentation">
                     </div>
                     <div class="mission-body">
                         <span class="mission-badge">Documentation</span>
                         <h4>Documentation utilisateur</h4>
-                        <p>Rédaction de guides et procédures à destination des utilisateurs finaux pour faciliter l'utilisation des outils internes et réduire les sollicitations au support technique.</p>
+                        <p>Rédaction de guides et procédures à destination des salariés et des futurs stagiaires : prise en main de Zscaler, procédures de sauvegarde, mise en place de nouvelles versions de Windows.</p>
                         <div class="mission-tags">
                             <span>Rédaction</span>
                             <span>Support</span>
@@ -370,33 +359,36 @@
                 </div>
 
                 <div class="mission-card">
-                    <img src="image/save.jpg" />
+                    <div class="mission-img">
+                        <img src="image/save.jpg" alt="Sauvegarde">
                     </div>
                     <div class="mission-body">
                         <span class="mission-badge">Sauvegarde</span>
                         <h4>Sauvegarde des postes de production</h4>
-                        <p>Mise en place d'une solution de sauvegarde des disques durs sur les postes des lignes de siroperie : configuration, vérification des restaurations et documentation du processus.</p>
+                        <p>Mise en place d'une solution de sauvegarde hors ligne des postes des lignes de siroperie, pour respecter le principe 3-2-1-1-0. Restauration testée par le maître de stage. Une vingtaine de postes traités.</p>
                         <div class="mission-tags">
                             <span>Backup</span>
-                            <span>Postes clients</span>
+                            <span>3-2-1-1-0</span>
+                            <span>NAS</span>
                             <span>Lignes de prod</span>
                         </div>
                     </div>
                 </div>
 
                 <div class="mission-card">
-                    <img src="image/bash.png" />
+                    <div class="mission-img">
+                        <img src="image/bash.png" alt="Script PowerShell">
                     </div>
                     <div class="mission-body">
                         <span class="mission-badge highlight">Mission principale</span>
                         <h4>Automatisation des drivers HP & Dell</h4>
-                        <p>Développement d'un script PowerShell d'automatisation du déploiement des drivers HP et Dell. Le script détecte le modèle de la machine et installe les drivers correspondants automatiquement, éliminant une tâche manuelle chronophage pour l'équipe IT.</p>
+                        <p>Développement en binôme d'un script PowerShell déployant automatiquement les drivers selon le modèle détecté. Gestion de l'affichage utilisateur (écran noir, audio), auto-désactivation au démarrage après installation réussie, et scripts manuels séparés pour la mise à jour BIOS.</p>
                         <div class="mission-tags">
                             <span>PowerShell</span>
                             <span>HP</span>
                             <span>Dell</span>
                             <span>Automatisation</span>
-                            <span>Déploiement</span>
+                            <span>BIOS</span>
                         </div>
                     </div>
                 </div>
