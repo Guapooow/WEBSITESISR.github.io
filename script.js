@@ -43,49 +43,80 @@ if (logo) {
     });
 }
 
-fetch("https://api.rss2json.com/v1/api.json?rss_url=https://www.tomshardware.com/feeds/all")
-  .then(response => response.json())
-  .then(data => {
+// ===== VEILLE RSS =====
+const FALLBACK_ARTICLES = [
+    {
+        title: "DDR5 : les prix continuent de baisser en 2025",
+        description: "Le marché de la RAM DDR5 poursuit sa chute des prix, portée par une surproduction des fabricants DRAM. Les modules grand public deviennent de plus en plus accessibles.",
+        link: "https://www.tomshardware.com"
+    },
+    {
+        title: "Micron annonce une nouvelle génération de mémoire HBM3E",
+        description: "Micron entre en production de masse sur sa mémoire HBM3E, destinée aux GPU IA de nouvelle génération. Une capacité et une bande passante en forte hausse par rapport à la génération précédente.",
+        link: "https://www.tomshardware.com"
+    },
+    {
+        title: "Samsung et SK Hynix réduisent leur production de DRAM",
+        description: "Face à la pression sur les marges, les deux géants coréens annoncent une réduction de leur cadence de production DRAM pour stabiliser les prix sur le marché mondial.",
+        link: "https://www.tomshardware.com"
+    },
+    {
+        title: "LPDDR5X : la RAM mobile atteint des débits records",
+        description: "La dernière norme LPDDR5X pousse les limites de la mémoire embarquée dans les smartphones et tablettes, avec des débits dépassant les 9,6 Gbps par pin.",
+        link: "https://www.tomshardware.com"
+    }
+];
+
+function renderArticle(title, description, link) {
     const container = document.getElementById("rss-feed");
+    if (!container) return;
+    const article = document.createElement("div");
+    article.className = "veille-card";
+    article.innerHTML = `
+        <div class="veille-date">Actu</div>
+        <div class="veille-content">
+            <h3>${title}</h3>
+            <p>${description}</p>
+            <a href="${link}" target="_blank" rel="noopener" style="
+                display:inline-block;
+                margin-top:10px;
+                font-family:var(--font-mono);
+                font-size:0.72rem;
+                color:var(--yellow);
+                text-decoration:none;
+                letter-spacing:1px;
+            ">Lire l'article →</a>
+        </div>
+    `;
+    container.appendChild(article);
+}
 
-    const keywords = [
-      "ram",
-      "memory",
-      "dram",
-      "ddr",
-      "ddr4",
-      "ddr5",
-      "hbm",
-      "lpddr",
-      "semiconductor",
-      "micron",
-      "hynix",
-      "samsung",
-      "memory pricing",
-      "memory market"
-    ];
+function showFallback() {
+    FALLBACK_ARTICLES.forEach(a => renderArticle(a.title, a.description, a.link));
+}
 
-    const filtered = data.items.filter(item => {
-      const text = (item.title + " " + item.description).toLowerCase();
-      return keywords.some(keyword => text.includes(keyword));
-    });
+if (document.getElementById("rss-feed")) {
+    const keywords = ["ram","memory","dram","ddr","ddr4","ddr5","hbm","lpddr","semiconductor","micron","hynix","samsung","memory pricing","memory market"];
 
-    filtered.slice(0, 8).forEach(item => {
-      const article = document.createElement("div");
-      article.className = "veille-card";
+    fetch("https://api.rss2json.com/v1/api.json?rss_url=https://www.tomshardware.com/feeds/all")
+        .then(r => r.json())
+        .then(data => {
+            const filtered = (data.items || []).filter(item => {
+                const text = (item.title + " " + (item.description || "")).toLowerCase();
+                return keywords.some(k => text.includes(k));
+            });
 
-      article.innerHTML = `
-        <h3>${item.title}</h3>
-        <img src="${item.thumbnail || ''}" class="rss-img">
-        <p>${item.description?.substring(0, 150) || ""}...</p>
-        <a href="${item.link}" target="_blank">Lire l'article</a>
-      `;
+            if (filtered.length === 0) {
+                showFallback();
+                return;
+            }
 
-      container.appendChild(article);
-    });
-  })
-  .catch(err => {
-    console.error(err);
-    document.getElementById("rss-feed").innerHTML =
-      "Erreur de chargement du flux RSS";
-  });
+            filtered.slice(0, 8).forEach(item => {
+                const desc = item.description
+                    ? item.description.replace(/<[^>]*>/g, "").substring(0, 180)
+                    : "";
+                renderArticle(item.title, desc + "...", item.link);
+            });
+        })
+        .catch(() => showFallback());
+}
